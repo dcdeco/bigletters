@@ -14,10 +14,6 @@
       text-align: center;
     }
 
-    h1 {
-      margin-bottom: 10px;
-    }
-
     textarea, select, button {
       width: 90%;
       max-width: 600px;
@@ -53,7 +49,6 @@
 <body>
 
   <h1>ASCII BIG LETTER MAKER</h1>
-  <p>Type text → get big ASCII letters</p>
 
   <textarea id="input" rows="2" placeholder="Type something..."></textarea>
 
@@ -64,24 +59,23 @@
     <option value="Small">Small</option>
   </select>
 
-  <button onclick="generate()">GENERATE</button>
+  <button id="generateBtn">GENERATE</button>
 
   <pre id="output"></pre>
 
-  <script type="module">
-    import figlet from "https://cdn.skypack.dev/figlet";
+  <!-- FIGLET (NON-MODULE, WORKS ON GITHUB PAGES) -->
+  <script src="https://unpkg.com/figlet/lib/figlet.js"></script>
 
-    function generate() {
+  <script>
+    document.getElementById("generateBtn").addEventListener("click", () => {
       const text = document.getElementById("input").value || "HELLO";
       const font = document.getElementById("font").value;
 
-      figlet.text(text, { font }, (err, result) => {
+      figlet.text(text, { font }, function (err, result) {
         document.getElementById("output").textContent =
           err ? err : result;
       });
-    }
-
-    window.generate = generate;
+    });
   </script>
 
 </body>
