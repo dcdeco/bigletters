@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ASCII Big Letter Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      background: #0b0b0b;
+      color: #00ffcc;
+      font-family: monospace;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    textarea, select, button {
+      width: 90%;
+      max-width: 600px;
+      margin: 10px auto;
+      display: block;
+      background: #111;
+      color: #00ffcc;
+      border: 1px solid #333;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 16px;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    pre {
+      margin-top: 20px;
+      white-space: pre;
+      overflow-x: auto;
+      background: #000;
+      padding: 15px;
+      border: 1px solid #222;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ASCII BIG LETTER MAKER</h1>
+  <p>Type text → get big ASCII letters</p>
+
+  <textarea id="input" rows="2" placeholder="Type something..."></textarea>
+
+  <select id="font">
+    <option value="Big">Big</option>
+    <option value="Standard">Standard</option>
+    <option value="Slant">Slant</option>
+    <option value="Small">Small</option>
+  </select>
+
+  <button onclick="generate()">GENERATE</button>
+
+  <pre id="output"></pre>
+
+  <script type="module">
+    import figlet from "https://cdn.skypack.dev/figlet";
+
+    function generate() {
+      const text = document.getElementById("input").value || "HELLO";
+      const font = document.getElementById("font").value;
+
+      figlet.text(text, { font }, (err, result) => {
+        document.getElementById("output").textContent =
+          err ? err : result;
+      });
+    }
+
+    window.generate = generate;
+  </script>
+
+</body>
+</html>
